@@ -1,0 +1,52 @@
+{
+  "name": "@absolutejs/logs",
+  "version": "0.1.0",
+  "description": "Structured log primitive for the AbsoluteJS substrate. Levels, child loggers, sinks (console-JSON, console-pretty, memory, rotating file), optional secret redaction via @absolutejs/secrets, optional trace-id correlation via @absolutejs/telemetry. Metrics surface for @absolutejs/metrics.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/absolutejs/logs.git"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "license": "BSL-1.1",
+  "author": "Alex Kahn",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && bun build src/index.ts --outdir dist --sourcemap --target=bun && tsc --project tsconfig.build.json",
+    "test": "bun test tests/",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"./**/*.{ts,json,md}\"",
+    "check:package": "bun run typecheck && bun run build && bun run test",
+    "release": "bun run format && bun run check:package && bun publish"
+  },
+  "keywords": [
+    "absolutejs",
+    "logs",
+    "logging",
+    "structured-logs",
+    "observability"
+  ],
+  "peerDependencies": {
+    "bun-types": "^1.3.14"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.14",
+    "prettier": "^3.8.3",
+    "typescript": "^5.9.0"
+  }
+}
