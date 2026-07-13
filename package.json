@@ -1,6 +1,6 @@
 {
   "name": "@absolutejs/logs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Structured log primitive for the AbsoluteJS substrate. Levels, child loggers, sinks (console-JSON, console-pretty, memory, rotating file), optional secret redaction via @absolutejs/secrets, optional trace-id correlation via @absolutejs/telemetry. Metrics surface for @absolutejs/metrics.",
   "repository": {
     "type": "git",
