@@ -53,7 +53,7 @@ const settings = Type.Object({
 });
 
 export const manifest = defineManifest<LoggerOptions, Logger>()({
-	contract: 1,
+	contract: 2,
 	identity: {
 		accent: '#f97316',
 		category: 'observability',
@@ -164,6 +164,12 @@ export const manifest = defineManifest<LoggerOptions, Logger>()({
 	tools: {
 		logging_stats: tool.runtime({
 			annotations: { readOnlyHint: true },
+			authorization: {
+				approval: 'never',
+				audience: 'admin',
+				effects: ['read'],
+				requiredScopes: ['logs:read']
+			},
 			description:
 				'Cumulative logger counters since the server started: lines logged per level, sink writes, and per-sink write errors.',
 			handler: (_input, logger) => JSON.stringify(logger.metrics()),
@@ -171,6 +177,15 @@ export const manifest = defineManifest<LoggerOptions, Logger>()({
 		}),
 		set_log_level: tool.runtime({
 			annotations: { idempotentHint: true },
+			authorization: {
+				approval: 'policy',
+				audience: 'admin',
+				effects: ['write'],
+				idempotency: { mode: 'host' },
+				requiredScopes: ['logs:configure'],
+				resource: { type: 'logger-configuration' },
+				reversible: false
+			},
 			description:
 				'Change the minimum log level at runtime — bump to debug during incident triage, back to info afterwards. Lasts until the server restarts.',
 			handler: ({ level }, logger) => {
