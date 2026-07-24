@@ -1,6 +1,6 @@
 {
   "name": "@absolutejs/logs",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Structured log primitive for the AbsoluteJS substrate. Levels, child loggers, sinks (console-JSON, console-pretty, memory, rotating file), optional secret redaction via @absolutejs/secrets, optional trace-id correlation via @absolutejs/telemetry. Metrics surface for @absolutejs/metrics.",
   "repository": {
     "type": "git",
@@ -55,11 +55,8 @@
     "observability"
   ],
   "dependencies": {
-    "@absolutejs/manifest": "^0.4.0",
+    "@absolutejs/manifest": "^0.7.1",
     "@sinclair/typebox": "^0.34.0"
-  },
-  "peerDependencies": {
-    "bun-types": "^1.3.14"
   },
   "devDependencies": {
     "@types/bun": "^1.3.14",
